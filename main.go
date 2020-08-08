@@ -6,6 +6,6 @@ import (
 
 func main() {
 
-	setOne.ProblemSix()
+	setOne.ProblemEight()
 
 }

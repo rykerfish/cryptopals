@@ -25,10 +25,10 @@ func ProblemSeven() {
 		log.Fatal(err)
 	}
 
-	bytes, _ := base64.StdEncoding.DecodeString(string(text))
+	cipher, _ := base64.StdEncoding.DecodeString(string(text))
 
-	plaintext := aes.EcbDecrypt(bytes, []byte(key))
+	plaintext := aes.EcbDecrypt(cipher, []byte(key))
 
-	fmt.Println(plaintext)
+	fmt.Println(string(plaintext))
 
 }
