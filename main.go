@@ -1,11 +1,11 @@
 package main
 
 import (
-	setOne "set1"
+	setTwo "set2"
 )
 
 func main() {
 
-	setOne.ProblemEight()
+	setTwo.ProblemTen()
 
 }

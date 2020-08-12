@@ -14,7 +14,7 @@ func ProblemSeven() {
 
 	key := "YELLOW SUBMARINE"
 
-	file, err := os.Open("./files/7.txt")
+	file, err := os.Open("./files/set1/7.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

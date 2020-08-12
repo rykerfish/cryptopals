@@ -13,7 +13,7 @@ import (
 // ProblemFour from Cryptopals Set 1
 func ProblemFour() {
 
-	file, err := os.Open("./files/4.txt")
+	file, err := os.Open("./files/set1/4.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

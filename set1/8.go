@@ -13,17 +13,19 @@ import (
 func ProblemEight() {
 
 	// File IO stuff
-	file, err := os.Open("./files/8.txt")
+	file, err := os.Open("./files/set1/8.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	scanner := bufio.NewScanner(file)
 
+	// Looks through every line in the file and uses aes.DetectEcb to find
+	// the line with repeating 16 byte blocks
 	var ecbBytes []byte
 	var lineNum = 1
 	for scanner.Scan() {
 		hexBytes, _ := hex.DecodeString(scanner.Text())
-		var same bool = aes.DetectEcb(hexBytes)
+		var same bool = aes.EcbDetect(hexBytes)
 		if same {
 			ecbBytes = hexBytes
 			break
