@@ -17,13 +17,13 @@ func ProblemTen() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	text, err := ioutil.ReadAll(file)
+	data, err := ioutil.ReadAll(file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Cipher specs
-	cipher, _ := base64.StdEncoding.DecodeString(string(text))
+	cipher, _ := base64.StdEncoding.DecodeString(string(data))
 	key := []byte("YELLOW SUBMARINE")
 	iv := make([]byte, 16)
 

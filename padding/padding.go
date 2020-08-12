@@ -10,10 +10,31 @@ func PadMsg(message []byte, blockLen int) []byte {
 		return message
 	}
 
+	padding := make([]byte, padLen)
 	for i := 0; i < padLen; i++ {
-		message = append(message, byte(padLen))
+		padding[i] = byte(padLen)
 	}
 
+	message = append(message, padding...)
+
 	return message
+
+}
+
+// Strip removes PKCS#7 padding from a message.
+func Strip(message []byte, blockLen int) []byte {
+
+	b := message[len(message)-1]
+	if int(b) > blockLen {
+		return message
+	}
+
+	for i := len(message) - int(b); i < len(message); i++ {
+		if message[i] != b {
+			return message
+		}
+	}
+
+	return message[:len(message)-int(b)]
 
 }

@@ -13,6 +13,6 @@ func ProblemNine() {
 
 	padMsg := padding.PadMsg([]byte(message), blockLen)
 
-	fmt.Println(padMsg)
+	fmt.Println(string(padMsg))
 
 }

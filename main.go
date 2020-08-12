@@ -6,6 +6,6 @@ import (
 
 func main() {
 
-	setTwo.ProblemTen()
+	setTwo.ProblemEleven()
 
 }

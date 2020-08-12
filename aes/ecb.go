@@ -5,6 +5,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"log"
+	"padding"
 )
 
 // EcbEncryptBlock will encrypt one block of text using AES ECB mode.
@@ -26,6 +27,7 @@ func EcbEncrypt(text []byte, key []byte) []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
+	text = padding.PadMsg(text, aesBlock.BlockSize())
 
 	cipher := make([]byte, 0, len(text))
 
@@ -64,6 +66,8 @@ func EcbDecrypt(cipher []byte, key []byte) []byte {
 		plaintextBlock := EcbDecryptBlock(cipher[i:i+aesBlock.BlockSize()], aesBlock)
 		plaintext = append(plaintext, plaintextBlock...)
 	}
+
+	plaintext = padding.Strip(plaintext, aesBlock.BlockSize())
 
 	return plaintext
 
