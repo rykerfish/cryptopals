@@ -1,14 +1,14 @@
-package setTwo
+package main
 
 import (
-	"aes"
 	"bufio"
 	"fmt"
 	"os"
+	"github.com/rykerfish/cryptopals/aes"
 )
 
 // ProblemEleven from Cryptopals Set 2.
-func ProblemEleven() {
+func main() {
 
 	inReader := bufio.NewReader(os.Stdin)
 	fmt.Print("Input: ")

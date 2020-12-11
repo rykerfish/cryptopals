@@ -3,8 +3,8 @@ package aes
 import (
 	"crypto/aes"
 	"log"
-	"padding"
-	"xor"
+	"github.com/rykerfish/cryptopals/padding"
+	"github.com/rykerfish/cryptopals/xor"
 )
 
 // CbcEncrypt implements AES CBC mode encryption.

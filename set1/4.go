@@ -1,19 +1,19 @@
-package setOne
+package main
 
 import (
 	"bufio"
 	"encoding/hex"
 	"fmt"
-	"freq"
 	"log"
 	"os"
-	"xor"
+	"github.com/rykerfish/cryptopals/freq"
+	"github.com/rykerfish/cryptopals/xor"
 )
 
 // ProblemFour from Cryptopals Set 1
-func ProblemFour() {
+func main() {
 
-	file, err := os.Open("./files/set1/4.txt")
+	file, err := os.Open("../files/set1/4.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

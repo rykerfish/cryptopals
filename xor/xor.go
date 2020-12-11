@@ -1,9 +1,9 @@
 package xor
 
 import (
-	"distance"
+	"github.com/rykerfish/cryptopals/distance"
 	"fmt"
-	"freq"
+	"github.com/rykerfish/cryptopals/freq"
 	"math"
 )
 

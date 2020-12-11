@@ -1,19 +1,19 @@
-package setTwo
+package main
 
 import (
-	"aes"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"github.com/rykerfish/cryptopals/aes"
 )
 
 // ProblemTen from Set 2 of Cryptopals
-func ProblemTen() {
+func main() {
 
 	// FileIO stuff
-	file, err := os.Open("./files/10.txt")
+	file, err := os.Open("../files/set2/10.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -5,7 +5,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"log"
-	"padding"
+	"github.com/rykerfish/cryptopals/padding"
 )
 
 // EcbEncryptBlock will encrypt one block of text using AES ECB mode.

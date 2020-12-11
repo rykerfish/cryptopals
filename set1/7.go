@@ -1,20 +1,20 @@
-package setOne
+package main
 
 import (
-	"aes"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"github.com/rykerfish/cryptopals/aes"
 )
 
 // ProblemSeven from Cryptopals Set 1
-func ProblemSeven() {
+func main() {
 
 	key := "YELLOW SUBMARINE"
 
-	file, err := os.Open("./files/set1/7.txt")
+	file, err := os.Open("../files/set1/7.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
