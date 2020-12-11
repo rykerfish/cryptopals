@@ -45,7 +45,7 @@ func SolveSingleCharXor(ciphertext []byte) (plaintext string, key string) {
 
 	var maxScore float64
 
-	for i := 0; i < 256; i++ {
+	for i := 0; i < 128; i++ {
 		decrypt := SingleCharXor(ciphertext, string(i))
 		score := freq.ScoreEngText(string(decrypt))
 

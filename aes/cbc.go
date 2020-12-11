@@ -3,19 +3,26 @@ package aes
 import (
 	"crypto/aes"
 	"log"
+	"padding"
 	"xor"
 )
 
 // CbcEncrypt implements AES CBC mode encryption.
-// NOTE: Does not account for padding so text length must be a multiple
-// of the key length.
+// NOTE: len(key) must equal len(iv)
 func CbcEncrypt(text []byte, key []byte, iv []byte) []byte {
 
-	cipher := make([]byte, 0, len(text))
+	if len(key) != len(iv) {
+		panic("Key length must be the same as the iv length")
+	}
+
 	aesBlock, err := aes.NewCipher(key)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// pads the message to be a multiple of the block size
+	text = padding.PadMsg(text, aesBlock.BlockSize())
+	cipher := make([]byte, 0, len(text))
 
 	// initialize cbcBlock by xoring the first block of text with the IV
 	cbcBlock := xor.Bytes(text[0:aesBlock.BlockSize()], iv)
@@ -35,8 +42,8 @@ func CbcEncrypt(text []byte, key []byte, iv []byte) []byte {
 
 }
 
-// CbcDecrypt implements AES CBC mode decryption. len(key) must equal len(iv)
-// and len(cipher) must be a multiple of len(key)
+// CbcDecrypt implements AES CBC mode decryption.
+// NOTE: len(key) must equal len(iv)
 func CbcDecrypt(cipher []byte, key []byte, iv []byte) []byte {
 
 	// cipher.Block initialization
@@ -60,6 +67,9 @@ func CbcDecrypt(cipher []byte, key []byte, iv []byte) []byte {
 
 		prevCipherBlock = cipher[block : block+aesBlock.BlockSize()]
 	}
+
+	// strips PKCS#7 padding
+	plaintext = padding.Strip(plaintext, aesBlock.BlockSize())
 
 	return plaintext
 

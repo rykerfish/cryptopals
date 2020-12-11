@@ -2,19 +2,30 @@ package setTwo
 
 import (
 	"aes"
+	"bufio"
 	"fmt"
+	"os"
 )
 
-// ProblemEleven from Cryptopals Set 2
+// ProblemEleven from Cryptopals Set 2.
 func ProblemEleven() {
-	text := []byte("this is not an even sixteen characters")
-	key := []byte("YELLOW SUBMARINE")
 
-	cipher := aes.EcbEncrypt(text, key)
+	inReader := bufio.NewReader(os.Stdin)
+	fmt.Print("Input: ")
+	text, _ := inReader.ReadString('\n')
 
-	fmt.Println(string(cipher))
-	fmt.Println(len(cipher))
+	cipher, mode := aes.EncryptionOracle([]byte(text))
 
-	plaintext := aes.EcbDecrypt(cipher, key)
-	fmt.Println(string(plaintext))
+	if aes.EcbDetect(cipher) {
+		fmt.Println("ECB mode detected.")
+	} else {
+		fmt.Println("CBC mode (probably)")
+	}
+
+	if mode == 1 {
+		fmt.Println("Real mode: ECB")
+	} else {
+		fmt.Println("Real mode: CBC")
+	}
+
 }

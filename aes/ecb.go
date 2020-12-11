@@ -19,18 +19,19 @@ func EcbEncryptBlock(plaintextBlock []byte, aesBlock cipher.Block) []byte {
 }
 
 // EcbEncrypt will encrypt text using the ECB mode of AES.
-// NOTE: This function does not currthey aren't saently account for padding.
 func EcbEncrypt(text []byte, key []byte) []byte {
 
 	var aesBlock, err = aes.NewCipher(key)
-
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// pads the message to be a multiple of the block size
 	text = padding.PadMsg(text, aesBlock.BlockSize())
 
 	cipher := make([]byte, 0, len(text))
 
+	// encryption loop for each block
 	for i := 0; i < len(text); i += aesBlock.BlockSize() {
 		cipherBlock := EcbEncryptBlock(text[i:i+aesBlock.BlockSize()], aesBlock)
 		cipher = append(cipher, cipherBlock...)
@@ -51,7 +52,6 @@ func EcbDecryptBlock(cipherBlock []byte, aesBlock cipher.Block) []byte {
 }
 
 // EcbDecrypt decrypts a cipher using ECB mode of AES.
-// NOTE: This function does not currently account for padding.
 func EcbDecrypt(cipher []byte, key []byte) []byte {
 
 	var aesBlock, err = aes.NewCipher(key)
@@ -67,6 +67,7 @@ func EcbDecrypt(cipher []byte, key []byte) []byte {
 		plaintext = append(plaintext, plaintextBlock...)
 	}
 
+	// strips padding
 	plaintext = padding.Strip(plaintext, aesBlock.BlockSize())
 
 	return plaintext
@@ -80,11 +81,17 @@ func EcbDetect(cipher []byte) bool {
 	blockLen := 16
 
 	for i := 0; i < len(cipher); i += blockLen {
+		if i+blockLen >= len(cipher) {
+			break
+		}
 		startBlock := cipher[i : i+blockLen]
 		for j := 0; j < len(cipher); j += blockLen {
 			// skips over startBlock when checking for equality
 			if i == j {
 				continue
+			}
+			if j+blockLen >= len(cipher) {
+				break
 			}
 			compareBlock := cipher[j : j+blockLen]
 			if bytes.Equal(startBlock, compareBlock) {
