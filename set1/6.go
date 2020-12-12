@@ -1,4 +1,4 @@
-package setOne
+package main
 
 import (
 	"encoding/base64"
@@ -6,14 +6,14 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"xor"
+	"github.com/rykerfish/cryptopals/xor"
 )
 
 // ProblemSix from Cryptopals Set 1
-func ProblemSix() {
+func main() {
 
 	// file stuff
-	file, err := os.Open("./files/set1/6.txt")
+	file, err := os.Open("../files/set1/6.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

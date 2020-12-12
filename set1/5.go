@@ -1,13 +1,13 @@
-package setOne
+package main
 
 import (
 	"encoding/hex"
 	"fmt"
-	"xor"
+	"github.com/rykerfish/cryptopals/xor"
 )
 
 // ProblemFive from Cryptopals Set 1
-func ProblemFive() {
+func main() {
 
 	text := "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
 	key := "ICE"

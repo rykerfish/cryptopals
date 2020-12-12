@@ -1,12 +1,12 @@
-package setTwo
+package main
 
 import (
 	"fmt"
-	"padding"
+	"github.com/rykerfish/cryptopals/padding"
 )
 
 // ProblemNine from Set 2 of Cryptopals
-func ProblemNine() {
+func main() {
 
 	message := "YELLOW SUBMARINE"
 	blockLen := 20

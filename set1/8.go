@@ -1,19 +1,19 @@
-package setOne
+package main
 
 import (
-	"aes"
 	"bufio"
 	"encoding/hex"
 	"fmt"
 	"log"
 	"os"
+	"github.com/rykerfish/cryptopals/aes"
 )
 
 // ProblemEight from Cryptopals Set 1
-func ProblemEight() {
+func main() {
 
 	// File IO stuff
-	file, err := os.Open("./files/set1/8.txt")
+	file, err := os.Open("../files/set1/8.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

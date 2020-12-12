@@ -1,13 +1,13 @@
-package setOne
+package main
 
 import (
 	hex "encoding/hex"
 	"fmt"
-	"xor"
+	"github.com/rykerfish/cryptopals/xor"
 )
 
 // ProblemTwo from Cryptopals Set 1
-func ProblemTwo() {
+func main() {
 
 	s1 := "1c0111001f010100061a024b53535009181c"
 	s2 := "686974207468652062756c6c277320657965"
