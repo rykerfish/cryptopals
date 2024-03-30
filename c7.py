@@ -10,11 +10,15 @@ def main():
 
     byte_dat:bytes = base64.b64decode(b64)
 
-    cipher = Cipher(algorithms.AES128(key), modes.ECB())
-    decryptor = cipher.decryptor()
-    text = decryptor.update(byte_dat) + decryptor.finalize()
+    text = aes_ecb(byte_dat, key)
 
     print(ut.b_to_ascii(text))
+
+
+def aes_ecb(dat, key):
+    cipher = Cipher(algorithms.AES128(key), modes.ECB())
+    encryptor = cipher.decryptor()
+    return encryptor.update(dat) + encryptor.finalize()
 
 
 if __name__ == "__main__":
