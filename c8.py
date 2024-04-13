@@ -4,7 +4,7 @@ import utilities as ut
 
 
 def main():
-    f = open("8.txt", "r")
+    f = open("data/8.txt", "r")
 
     for line in f:
         dat = base64.b16decode(line.strip().upper()) # only works on A-F???

@@ -1,6 +1,6 @@
 import utilities as ut
 
-f = open("4.txt", "r")
+f = open("data/4.txt", "r")
 lines = f.readlines()
 
 best_score = 0

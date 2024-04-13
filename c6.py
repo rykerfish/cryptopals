@@ -10,7 +10,7 @@ def main():
     h_dist: int = hammingDist(test_a, test_b)
     assert(h_dist == 37)
 
-    f = open("6.txt", "r")
+    f = open("data/6.txt", "r")
     b64:str = f.read()
     byte_dat:bytes = base64.b64decode(b64)
 
@@ -51,8 +51,6 @@ def main():
     key = ''.join(key)
     print(key)
 
-    
-
 def solveSingleKeyXOR(byte_arr:bytes) -> int:
 
     best_score = -1
@@ -69,20 +67,6 @@ def solveSingleKeyXOR(byte_arr:bytes) -> int:
             best_key = key
 
     return best_key
-
-# def scoreLetterFreq(decode:str) -> float:
-
-#     exp_freq = ut.getLetterFreq()
-#     obs_freq = {}
-#     for char in exp_freq.keys():
-#         obs_freq[char] = decode.count(char)/len(decode)
-
-#     exp_vals = list(exp_freq.values())
-#     obs_vals = list(obs_freq.values())
-
-#     hellinger = (1/np.sqrt(2)) * np.linalg.norm(np.sqrt(exp_vals) - np.sqrt(obs_vals))
-
-#     return 1-hellinger*hellinger
 
 def scoreLetterFreq(decode:str) -> float:
 
@@ -108,9 +92,6 @@ def splitDat(dat: bytes, keysize:int) -> list:
 
 def avgHammingDist(byteArr:bytes, keysize:int, n_chunks:int=40) -> float:
 
-    if n_chunks % 2 != 0:
-        raise IndexError("Number of chunks to average over needs to be divisible by 2")
-
     avgDist = 0
     for i in range(0,n_chunks):
         a = byteArr[i*keysize:(i+1)*keysize]
@@ -122,9 +103,10 @@ def avgHammingDist(byteArr:bytes, keysize:int, n_chunks:int=40) -> float:
 
     return avgDist
 
-
-
 def hammingDist(a:bytes, b:bytes) -> int:
+
+    if len(a) != len(b):
+        raise Exception("Error: byte arrays must be equal length to compute a hamming distance.")
 
     xor_ab = ut.xor(a,b)
 

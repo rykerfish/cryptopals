@@ -5,7 +5,7 @@ import utilities as ut
 def main():
 
     key = b"YELLOW SUBMARINE"
-    f = open("7.txt", "r")
+    f = open("data/7.txt", "r")
     b64:str = f.read()
 
     byte_dat:bytes = base64.b64decode(b64)
