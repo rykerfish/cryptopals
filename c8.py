@@ -1,7 +1,5 @@
 import base64
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-import utilities as ut
-
 
 def main():
     f = open("data/8.txt", "r")
@@ -30,11 +28,6 @@ def detectEcb(dat):
         block_arr.append(block)
 
     return False
-
-def aes_ecb(dat, key):
-    cipher = Cipher(algorithms.AES128(key), modes.ECB())
-    encryptor = cipher.decryptor()
-    return encryptor.update(dat) + encryptor.finalize()
 
 
 if __name__ == "__main__":

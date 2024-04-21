@@ -1,6 +1,7 @@
 import base64
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import utilities as ut
+import conversions as conv
 
 def main():
 
@@ -12,11 +13,11 @@ def main():
 
     text = aes_ecb(byte_dat, key)
 
-    print(ut.b_to_ascii(text))
+    print(conv.b_to_ascii(text))
 
 
 def aes_ecb(dat, key):
-    cipher = Cipher(algorithms.AES128(key), modes.ECB())
+    cipher = Cipher(algorithms.AES(key), modes.ECB())
     encryptor = cipher.decryptor()
     return encryptor.update(dat) + encryptor.finalize()
 
