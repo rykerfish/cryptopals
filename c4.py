@@ -1,4 +1,5 @@
 import utilities as ut
+import conversions as conv
 
 f = open("data/4.txt", "r")
 lines = f.readlines()
@@ -12,7 +13,7 @@ for hex_str in lines:
 
     for key in range(0,128):
         decode = bytes((b & 0b01111111) ^ key for b in b_str) # discards upper bit that isn't ascii?
-        d_str = ut.b_to_ascii(decode).lower()
+        d_str = conv.b_to_ascii(decode).lower()
 
         score = ut.rank(d_str)
 

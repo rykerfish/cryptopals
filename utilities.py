@@ -1,8 +1,18 @@
-def xor(b1: bytes, b2: bytes) -> bytes:
+def pkcs_pad(b1: bytearray, blocklength: int = 16) -> bytearray:
+    n = len(b1)
+    pad_len = blocklength % n
+    pad = [pad_len]*pad_len 
+
+    padded = bytearray(b1)
+    padded.extend(pad)
+
+    return padded
+
+def xor(b1: bytes, b2: bytes) -> bytearray:
     if(len(b1) != len(b2)):
         raise Exception("Arrays aren't same length")
 
-    return  bytes(a ^ b for a,b in zip(b1, b2))
+    return  bytearray(a ^ b for a,b in zip(b1, b2))
 
 def rank(decode: str): # ranks based on the number of letters most common in english language
     common: str = "etaoin shrdlu"

@@ -1,7 +1,7 @@
 import utilities as ut
 import base64
 import numpy as np
-import scipy
+import conversions as conv
 
 def main():
     test_a: bytes = bytes("this is a test", encoding="ascii")
@@ -44,7 +44,7 @@ def main():
             key_ind = 0
 
     decrypt = bytes(decrypt)
-    decrypt = ut.b_to_ascii(decrypt)
+    decrypt = conv.b_to_ascii(decrypt)
 
     print(decrypt)
     key = [chr(x) for x in key]
@@ -58,7 +58,7 @@ def solveSingleKeyXOR(byte_arr:bytes) -> int:
 
     for key in range(0,128):
         decode = bytes(b ^ key for b in byte_arr)
-        d_str = ut.b_to_ascii(decode).lower()
+        d_str = conv.b_to_ascii(decode).lower()
 
         score = scoreLetterFreq(d_str)
 

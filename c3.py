@@ -1,6 +1,5 @@
 import utilities as ut
-import numpy as np
-import scipy.stats as sp
+import conversions as conv
 
 def rank(decode: str): # ranks based on the number of letters most common in english language
     common: str = "etaoin shrdlu"
@@ -26,7 +25,7 @@ best_str = ""
 for key in range(0,128):
 
     decode = bytes(b ^ key for b in b_str)
-    d_str = ut.b_to_ascii(decode).lower()
+    d_str = conv.b_to_ascii(decode).lower()
 
     score = rank(d_str)
 
