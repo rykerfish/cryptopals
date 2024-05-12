@@ -1,6 +1,13 @@
 def pkcs_pad(b1: bytearray, blocklength: int = 16) -> bytearray:
     n = len(b1)
-    pad_len = blocklength % n
+    if n % blocklength == 0:
+        return b1
+    
+    pad_len = 0
+    if n < blocklength:
+        pad_len = blocklength - n
+    else:
+        pad_len = blocklength - (n % blocklength)
     pad = [pad_len]*pad_len 
 
     padded = bytearray(b1)
@@ -9,17 +16,17 @@ def pkcs_pad(b1: bytearray, blocklength: int = 16) -> bytearray:
     return padded
 
 def strip_pkcs(b1: bytearray, blocklength: int = 16) -> bytearray:
-    n = len(b1)
-    if b1 % blocklength == 0:
-        return b1
     
     pad_num:int = b1[-1]
-    if pad_num > blocklength-1:
-        raise Exception("Can't strip PKCS padding: last byte doesn't seem to be padding.")
     
+    if pad_num > blocklength-1:
+        # not a valid padding
+        return b1
+    
+    n = len(b1)
     for i in range(0,pad_num):
         if b1[n-i-1] != pad_num:
-            raise Exception("Can't strip PKCS padding: incorrect number of padded bytes")
+            return b1
         
     return b1[0:n-pad_num]
 

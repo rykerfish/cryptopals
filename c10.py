@@ -4,10 +4,9 @@ import base64
 
 def cbc_encrypt(pt: bytearray, key: bytes, iv: bytes, blocklength: int = 16) -> bytearray:
 
-    n = len(pt)
-    if n % blocklength != 0:
-        pt = ut.pkcs_pad(pt)
+    pt = ut.pkcs_pad(pt)
 
+    n = len(pt)
     n_blocks = int(n / blocklength)
 
     ct = bytearray(n)
@@ -54,13 +53,8 @@ iv = bytes(16)
 ct:bytearray = cbc_encrypt(test, key, iv)
 pt:bytearray = cbc_decrypt(ct, key, iv)
 
-## TODO should work for non-block multiple strings. currently chops last block
-
-print(len(test))
-
-print(test)
-print(pt)
-# assert(pt == test)
+pt = ut.strip_pkcs(pt)
+assert(pt == test)
 
 f = open("data/10.txt", "r")
 b64:str = f.read()
@@ -72,6 +66,4 @@ iv = bytes(16) # all zeros
 pt = cbc_decrypt(dat, key, iv)
 # print(pt)
 
-
-
-    
+f.close()
