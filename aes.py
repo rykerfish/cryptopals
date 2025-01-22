@@ -1,15 +1,15 @@
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import utilities as ut
 
-def ecb_encrypt(dat, key):
+def ecb_encrypt(dat, key) -> bytearray:
     cipher = Cipher(algorithms.AES(key), modes.ECB())
     encryptor = cipher.encryptor()
-    return encryptor.update(dat) + encryptor.finalize()
+    return bytearray(encryptor.update(dat) + encryptor.finalize())
 
-def ecb_decrypt(dat, key):
+def ecb_decrypt(dat, key) -> bytearray:
     cipher = Cipher(algorithms.AES(key), modes.ECB())
     decryptor = cipher.decryptor()
-    return decryptor.update(dat) + decryptor.finalize()
+    return bytearray(decryptor.update(dat) + decryptor.finalize())
 
 def cbc_encrypt(pt: bytearray, key: bytes, iv: bytes, blocklength: int = 16) -> bytearray:
 
